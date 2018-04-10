@@ -1,0 +1,32 @@
+-------------------------------------------------------------------------------
+Test set: databaseAccessObjects.TestUsersDAO
+-------------------------------------------------------------------------------
+Tests run: 7, Failures: 7, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+databaseAccessObjects.TestUsersDAO.test_AddingAUserToDatabaseWithUniqueEmailAndUsernameReturnsTrue()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_AddingAUserToDatabaseWithUniqueEmailAndUsernameReturnsTrue(TestUsersDAO.java:24)
+
+databaseAccessObjects.TestUsersDAO.test_RemoveUserCorrectlyRemovesUserFromDatabaseIfAlreadyExists()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_RemoveUserCorrectlyRemovesUserFromDatabaseIfAlreadyExists(TestUsersDAO.java:33)
+
+databaseAccessObjects.TestUsersDAO.test_GetUserByEmailReturnsNullWithNoneExistingUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_GetUserByEmailReturnsNullWithNoneExistingUser(TestUsersDAO.java:51)
+
+databaseAccessObjects.TestUsersDAO.test_GetUserByUsernameReturnsNullWithNoneExistingUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_GetUserByUsernameReturnsNullWithNoneExistingUser(TestUsersDAO.java:59)
+
+databaseAccessObjects.TestUsersDAO.test_GetUserByUsernameReturnsTheUserPreviouslyAddedUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_GetUserByUsernameReturnsTheUserPreviouslyAddedUser(TestUsersDAO.java:66)
+
+databaseAccessObjects.TestUsersDAO.test_RemoveUserWithNoneExistingUserCorrectlyDoesNothingAndReturnsFalse()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_RemoveUserWithNoneExistingUserCorrectlyDoesNothingAndReturnsFalse(TestUsersDAO.java:43)
+
+databaseAccessObjects.TestUsersDAO.test_GetUserByEmailReturnsThePreviouslyAddedUser()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestUsersDAO.test_GetUserByEmailReturnsThePreviouslyAddedUser(TestUsersDAO.java:77)
+

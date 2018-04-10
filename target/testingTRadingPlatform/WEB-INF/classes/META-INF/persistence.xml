@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<persistence xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+	version="2.0" xmlns="http://java.sun.com/xml/ns/persistence">
+	<persistence-unit name="persunit" transaction-type="RESOURCE_LOCAL">
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<class>databaseEntities.User</class>
+		<class>databaseEntities.Trade</class>
+		<class>databaseEntities.Share</class>
+		<class>databaseEntities.Company</class>
+		<class>databaseEntities.OwnedShare</class>
+		<class>databaseEntities.CurrentTrade</class>
+		<properties>
+			<property name="javax.persistence.jdbc.driver" value="oracle.jdbc.driver.OracleDriver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:oracle:thin:@localhost" />
+			<property name="javax.persistence.jdbc.user" value="trainee1" />
+			<property name="javax.persistence.jdbc.password" value="!QAZSE4" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="eclipselink.ddl-generation" value="create-tables" />
+			<property name="hibernate.dialect" value="org.hibernate.dialect.Oracle10gDialect" />
+			<property name="eclipselink.ddl-generation.output-mode"
+				value="database" />
+				
+		</properties>
+	</persistence-unit>
+	<!-- <provider>org.hibernate.ejb.HibernatePersistence</provider> -->
+</persistence>

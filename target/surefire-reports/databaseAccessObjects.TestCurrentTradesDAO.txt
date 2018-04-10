@@ -1,0 +1,16 @@
+-------------------------------------------------------------------------------
+Test set: databaseAccessObjects.TestCurrentTradesDAO
+-------------------------------------------------------------------------------
+Tests run: 3, Failures: 3, Errors: 0, Skipped: 0, Time elapsed: 0.003 sec <<< FAILURE!
+databaseAccessObjects.TestCurrentTradesDAO.test_ifShowAllCurrentTradesByShare()  Time elapsed: 0.002 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestCurrentTradesDAO.test_ifShowAllCurrentTradesByShare(TestCurrentTradesDAO.java:51)
+
+databaseAccessObjects.TestCurrentTradesDAO.test_ifShowAllCurrentTradesForAllCompaniesAreDisplayed()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestCurrentTradesDAO.test_ifShowAllCurrentTradesForAllCompaniesAreDisplayed(TestCurrentTradesDAO.java:41)
+
+databaseAccessObjects.TestCurrentTradesDAO.test_ifSharesBuyPriceSellPriceAndTimePostedIsAdded()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestCurrentTradesDAO.test_ifSharesBuyPriceSellPriceAndTimePostedIsAdded(TestCurrentTradesDAO.java:61)
+

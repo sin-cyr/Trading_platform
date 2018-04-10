@@ -1,0 +1,14 @@
+-------------------------------------------------------------------------------
+Test set: databaseAccessObjects.TestSharesPricesDAO
+-------------------------------------------------------------------------------
+Tests run: 2, Failures: 2, Errors: 0, Skipped: 0, Time elapsed: 0 sec <<< FAILURE!
+databaseAccessObjects.TestSharesPricesDAO.test_ifGetAllSharesPricesAreListed()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestSharesPricesDAO.test_ifGetAllSharesPricesAreListed(TestSharesPricesDAO.java:43)
+
+databaseAccessObjects.TestSharesPricesDAO.test_ifSharesPricesDetailsAreAdded()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.Error: Unresolved compilation problem: 
+	The method setUser(User) is undefined for the type Trade
+
+	at databaseAccessObjects.TestSharesPricesDAO.test_ifSharesPricesDetailsAreAdded(TestSharesPricesDAO.java:52)
+

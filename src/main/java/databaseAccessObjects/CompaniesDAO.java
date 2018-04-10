@@ -1,0 +1,127 @@
+package databaseAccessObjects;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import javax.persistence.Query;
+
+import databaseEntities.Company;
+import databaseEntities.User;
+
+public class CompaniesDAO {
+
+	private static final String PERSISTENCE_UNIT_NAME = "persunit";
+	private static EntityManagerFactory emf;
+	EntityManager em;
+
+	public CompaniesDAO() {
+		emf = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
+		em = emf.createEntityManager();
+
+	}
+
+	// Add a new company
+	public Company addCompany(Company company) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.persist(company);
+		em.getTransaction().commit();
+		em.close();
+		return company;
+	}
+	
+	public boolean removeCompany(Company company) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.remove(company);
+		em.getTransaction().commit();
+		em.close();
+		return true;
+	}
+	
+
+	//SEARCH FOR COMPANY BY COMPANY NAME
+	public Company getCompanyByCompanyName(String name) {
+		em = emf.createEntityManager();
+		Query query = em.createQuery("select c from Company c where c.name LIKE :name");
+		query.setParameter("name", "%"+name+"%");
+		List<Company> companies = query.getResultList();
+		if (!companies.isEmpty()){
+		return companies.get(0);
+		} else{
+			return null;
+		}
+	}
+	
+	public List getCompanyByIndustry(String industry){
+		em = emf.createEntityManager();
+		Query query = em.createQuery("select c from Company c where c.industry = :industry");
+		query.setParameter("industry", industry);
+		List<Company> compIndustry = query.getResultList();
+		for (Company c : compIndustry){
+			System.out.println(c.getName());
+		}
+		if (!compIndustry.isEmpty()){
+		return compIndustry;
+		}
+		return null;
+	}
+
+	// List all the companies and the shares
+	public List listAllCompaniesAndShares() {
+		em = emf.createEntityManager();
+		Query query = em.createQuery("select c from Company c");
+		List<Company> companies = query.getResultList();
+		for (Company comp : companies) {
+			System.out.println("Company Name:" + comp.getName() + " Shares:" + comp.getShares());
+		}
+		return companies;
+	}
+
+	public boolean compRemove(Company company) {
+		em = emf.createEntityManager();
+		em.getTransaction().begin();
+		Company getCompany = getCompanyByCompanyName(company.getName());
+		if (getCompany == null){
+			return false;
+		}
+		Company searchCompany = em.find(Company.class, getCompany.getCompanyId());
+		em.remove(searchCompany);
+		em.getTransaction().commit();
+		em.close();
+		return true;
+	}
+
+<<<<<<< .mine
+ 
+
+	// update company
+//	public boolean updateCompany(Company company) {
+//		Company getCompany = getCompanyByCompanyName(company.getName());
+//		em.getTransaction().begin();
+//		Company searchCompany = em.find(Company.class, getCompany.getCompanyId());
+//		searchCompany.setCompanyId(company.getCompanyId());
+//		searchCompany.setName(company.getName());
+//		searchCompany.setShares(company.getShares());
+//		em.getTransaction().commit();
+//		em.merge(searchCompany);
+//		em.close();
+//		// if company already exists
+//		return true;
+//}
+
+	
+||||||| .r444
+=======
+>>>>>>> .r498
+	public List queryCompany(String name){
+		em = emf.createEntityManager();
+		Query query = em.createQuery("select c from Company c where UPPER(c.name) LIKE :pattern ");
+		query.setParameter("pattern", "%"+name.toUpperCase()+"%");
+		List<Company> companies = query.getResultList();
+		
+		return companies;
+	}
+}

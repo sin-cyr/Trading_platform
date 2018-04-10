@@ -1,0 +1,20 @@
+-------------------------------------------------------------------------------
+Test set: databaseAccessObjects.TestOwnedSharesDAO
+-------------------------------------------------------------------------------
+Tests run: 4, Failures: 4, Errors: 0, Skipped: 0, Time elapsed: 0.001 sec <<< FAILURE!
+databaseAccessObjects.TestOwnedSharesDAO.test_AddShareReturnsTrueForNoneExistingOwnedShare()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestOwnedSharesDAO.test_AddShareReturnsTrueForNoneExistingOwnedShare(TestOwnedSharesDAO.java:31)
+
+databaseAccessObjects.TestOwnedSharesDAO.test_GetAllSharesReturnsListThatIncreasesInSizeByOneWhenOwnedShareIsAdded()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestOwnedSharesDAO.test_GetAllSharesReturnsListThatIncreasesInSizeByOneWhenOwnedShareIsAdded(TestOwnedSharesDAO.java:47)
+
+databaseAccessObjects.TestOwnedSharesDAO.test_TransferSharesBetweenUsersCorrectlyRemovesQuantityFromSellerAndAddsToBuyer()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestOwnedSharesDAO.test_TransferSharesBetweenUsersCorrectlyRemovesQuantityFromSellerAndAddsToBuyer(TestOwnedSharesDAO.java:68)
+
+databaseAccessObjects.TestOwnedSharesDAO.test_AddShareReturnsFalseForExistingOwnedShare()  Time elapsed: 0 sec  <<< FAILURE!
+java.lang.NullPointerException
+	at databaseAccessObjects.TestOwnedSharesDAO.test_AddShareReturnsFalseForExistingOwnedShare(TestOwnedSharesDAO.java:39)
+

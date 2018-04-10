@@ -1,0 +1,237 @@
+package controllers;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import databaseAccessObjects.CompaniesDAO;
+import databaseAccessObjects.CurrentTradesDAO;
+import databaseEntities.Company;
+import databaseEntities.CurrentTrade;
+
+@Controller
+public class SortingController {
+
+	@RequestMapping(value = "/sortTrades", method = RequestMethod.POST)
+	public String sortBuyPrices(@RequestParam("options") String choice, Model model, HttpSession session,
+			HttpServletRequest request) {
+		if (session.getAttribute("loggedUser") == null) {
+
+			return "index";
+		}
+		choice = request.getParameter("options");
+		CurrentTradesDAO dao = new CurrentTradesDAO();
+		List<CurrentTrade> currentTrades = dao.showAllCurrentTrades();
+		CompaniesDAO cdao = new CompaniesDAO();
+
+		if (choice.equals("bplowest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp.getBuyPrice(), bp1.getBuyPrice());
+				}
+			});
+
+		} else if (choice.equals("bphighest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp1.getBuyPrice(), bp.getBuyPrice());
+				}
+			});
+
+		} else if (choice.equals("sphighest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp1.getSellPrice(), bp.getSellPrice());
+				}
+			});
+
+		} else if (choice.equals("splowest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp.getSellPrice(), bp1.getSellPrice());
+				}
+			});
+
+		} else if (choice.equals("tprecent")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade ct1, CurrentTrade ct2) {
+					return ct1.getTimePosted().compareTo(ct2.getTimePosted());
+				}
+			});
+
+		} else if (choice.equals("tplatest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade ct1, CurrentTrade ct2) {
+					return ct2.getTimePosted().compareTo(ct1.getTimePosted());
+				}
+			});
+
+		} else if (choice.equals("atoz")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade ct1, CurrentTrade ct2) {
+					return ct1.getShare().getCompany().getIndustry()
+							.compareTo(ct2.getShare().getCompany().getIndustry());
+				}
+			});
+
+		}
+		model.addAttribute("currentTrades", currentTrades);
+
+		return "/currentTrades";
+	}
+
+	
+	@RequestMapping(value = "/filterTrades", method= RequestMethod.POST)
+	public String filterResults(@RequestParam("filter") String choice, Model model, HttpSession session,
+			HttpServletRequest request) {
+		if (session.getAttribute("loggedUser") == null) {
+
+			return "index";
+		}
+
+		choice = request.getParameter("filter");
+		CurrentTradesDAO dao = new CurrentTradesDAO();
+		List<CurrentTrade> currentTrades = dao.showAllCurrentTrades();
+		CompaniesDAO cdao = new CompaniesDAO();
+
+		List<CurrentTrade> industryTrades = new ArrayList<CurrentTrade>();
+		for (CurrentTrade c : currentTrades) {
+			if (c.getShare().getCompany().getIndustry().equals(choice)) {
+				industryTrades.add(c);
+			}
+		}
+		model.addAttribute("currentTrades", industryTrades);
+		return "/currentTrades";
+	
+	
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/searchTrades", method = RequestMethod.POST)
+	public String searchTrades(@RequestParam("options") String choice,@RequestParam("filter")String choice2, Model model, HttpSession session,
+			HttpServletRequest request) {
+		if (session.getAttribute("loggedUser") == null) {
+
+			return "index";
+		}
+		choice = request.getParameter("options");
+		CurrentTradesDAO dao = new CurrentTradesDAO();
+		List<CurrentTrade> currentTrades = dao.showAllCurrentTrades();
+		CompaniesDAO cdao = new CompaniesDAO();
+
+		if (choice.equals("bplowest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp.getBuyPrice(), bp1.getBuyPrice());
+				}
+			});
+			List<CurrentTrade> industryTrades = new ArrayList<CurrentTrade>();
+			if(choice2.equals("All")){
+				model.addAttribute("currentTrades", currentTrades);
+				return "/currentTrades";
+			}
+			for (CurrentTrade c : currentTrades) {
+				if (c.getShare().getCompany().getIndustry().equals(choice2)) {
+					industryTrades.add(c);
+					model.addAttribute("currentTrades", industryTrades);
+					
+				}
+				
+			}
+
+			
+		}
+		
+	
+		
+			else if (choice.equals("bphighest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp1.getBuyPrice(), bp.getBuyPrice());
+				}
+			});
+			List<CurrentTrade> industryTrades = new ArrayList<CurrentTrade>();
+			for (CurrentTrade c : currentTrades) {
+				if (c.getShare().getCompany().getIndustry().equals(choice2)) {
+					industryTrades.add(c);
+				}
+				model.addAttribute("currentTrades", industryTrades);
+			}
+			model.addAttribute("currentTrades", currentTrades);
+			
+		}
+		else if (choice.equals("splowest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp1.getBuyPrice(), bp.getBuyPrice());
+				}
+			});
+			List<CurrentTrade> industryTrades = new ArrayList<CurrentTrade>();
+			for (CurrentTrade c : currentTrades) {
+				if (c.getShare().getCompany().getIndustry().equals(choice2)) {
+					industryTrades.add(c);
+				}
+				model.addAttribute("currentTrades", industryTrades);
+			}
+			model.addAttribute("currentTrades", currentTrades);
+		}
+		
+		
+		
+		
+		else if (choice.equals("sphighest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp1.getSellPrice(), bp.getSellPrice());
+				}
+			});
+
+		} else if (choice.equals("splowest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade bp, CurrentTrade bp1) {
+					return Double.compare(bp.getSellPrice(), bp1.getSellPrice());
+				}
+			});
+
+		} else if (choice.equals("tprecent")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade ct1, CurrentTrade ct2) {
+					return ct1.getTimePosted().compareTo(ct2.getTimePosted());
+				}
+			});
+
+		} else if (choice.equals("tplatest")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade ct1, CurrentTrade ct2) {
+					return ct2.getTimePosted().compareTo(ct1.getTimePosted());
+				}
+			});
+
+		} else if (choice.equals("atoz")) {
+			Collections.sort(currentTrades, new Comparator<CurrentTrade>() {
+				public int compare(CurrentTrade ct1, CurrentTrade ct2) {
+					return ct1.getShare().getCompany().getIndustry()
+							.compareTo(ct2.getShare().getCompany().getIndustry());
+				}
+			});
+
+		}
+		//model.addAttribute("currentTrades", currentTrades);
+
+		return "/currentTrades";
+	}
+	
+
+}
