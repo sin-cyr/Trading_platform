@@ -2,11 +2,10 @@ package controllers;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tomcat.util.codec.binary.Base64;
+import org.eclipse.persistence.internal.oxm.conversion.Base64;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,7 +24,7 @@ public class ProfileController {
 		HttpSession session = request.getSession();
 		User loggedUser = (User) session.getAttribute("loggedUser");
 		User user = dao.getUserByUsername(loggedUser.getUsername());
-		byte[] imagebytes = Base64.encodeBase64(user.getImageFile());
+		byte[] imagebytes = Base64.base64Encode(user.getImageFile()); 
 		String base64Encoded = null;
 		try {
 
